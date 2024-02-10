@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.9/themes/odometer-theme-default.min.css">
+</head>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.3.0/dist/tesseract.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        @font-face {
+            font-family: blueberry;
+            src: url(/font/blueberry_4/Blueberry\ .ttf);
+        }
+
+        @font-face {
+            font-family: futura;
+            src: url(/font//futura-display-cufonfonts/Futura\ Display.ttf);
+        }
+
+        .section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: black;
+        }
+
+        #title {
+            position: absolute;
+            top: 150%;
+            left: 11%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: blueberry;
+            font-size:70px;
+        }
+
+        #image-container {
+            display: inline-block;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        #image-container img {
+            height: 180px;
+            width: 150px;
+            border-radius: 50%;
+        }
+
+        #name {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .section:nth-child(4) {
+            background-color: #ffffff; /* Orange */
+        }
+        .section:nth-child(5) {
+            background-color: #ffffff; /* Orange */
+        }
+
+
+        #green_col {
+            width: 90%;
+            height: 100%;
+            object-fit: fill;
+            position: absolute;
+            left: 0;
+        }
+
+        #myIframe {
+            width: 600px;
+            height: 600px;
+            position: absolute;
+            right: 0;
+            border: 0;
+        }
+
+        #submit {
+            position: absolute;
+            top: 60%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            background-color: #3f51b5; /* Indigo */
+            border: 2px solid #3f51b5;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 2em;
+            font-family: futura;
+        }
+
+        #cart {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          
+        }
+        @keyframes moveCart {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(calc(100vw - 100%));
+    }
+}
+
+        .flip-container {
+            perspective: 1000px;
+        }
+
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flipped {
+            transform: rotateY(180deg);
+        }
+
+        .front, .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+        #form-section {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #section-3 container{
+            position: absolute;
+            top: 0px;
+        }
+            #section4 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            }
+
+    .container3 {
+    width: 60%;
+    height: 100%;
+    position: absolute;
+    top: 210vh;
+    left:20 px;
+    }
+    div.tile{
+        border:1px solid black;
+        padding:10px;
+        margin:40px;
+        border-radius: 15px;
+        height:500px;
+        box-shadow: 0 0 10px #000000;
+    }
+    #name1,#name2,#name3,#name4{
+        margin-top: 20px;
+        margin-left: 60px;
+        font-family: blueberry;
+    }
+    #name2{
+        margin-left: 80px;
+        margin-top: 30px;
+    }
+    #randomNumberContainer {
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin: 20px;
+      text-align: center;
+      font-size: 20px;
+      cursor: pointer;
+    }
+        </style>
+        <title>Grocerinator</title>
+        </head>
+        <body>
+
+        <div id="section1" class="section">
+            <img src="/images/Bg.png" id="green_col">
+
+            <span style="position: absolute; top: 35%; left: 21%; transform: translate(-50%, -50%);" id="title">Grocerinator</span>
+
+        <button style="z-index:99;" id="submit" class="scroll-button" onclick="scrollToPage('section2')">Scroll to Next Section</button>
+
+        <img src="/images/stars.png" id="cart" style="position: absolute;left:100px;top:60%">
+
+        <img src="/images/cart.png" id="cart">
+
+        <iframe id="myIframe" src="https://giphy.com/embed/tDbPlJFxQZeREMsdnO" width="680" height="680" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe><p><a href="https://giphy.com/gifs/tDbPlJFxQZeREMsdnO"></a></p>
+    </div>
+    
+    
+    <div id="section2" class="section">
+        <div class="tile">
+            <button type="submit" onclick="scrollToPage('section3')"style="border:0px">
+            <img src="/page2_images/baby.jpg" height="300" width="300" style="border:0px"></button>
+            <div id="name1">Babies</div>
+        </div>
+        <div class="tile">
+            <button type="submit" onclick="scrollToPage('section3')"style="border:0px">
+            <img src="/page2_images/adult.jpg" height="300" width="300" style="border:0px"></button>
+            <div id="name2">Adults</div>
+        </div>
+        <div class="tile">
+            <button type="submit" onclick="scrollToPage('section3')" style="border:0px">
+            <img src="/page2_images/weight_loss.jpg" height="300" width="300" style="border:0px"></button>
+            <div id="name3">To lose weight</div>
+        </div>
+        <div class="tile">
+            <button type="submit" onclick="scrollToPage('section3')" style="border:0px">
+            <img src="/page2_images/muscle.jpg" height="300" width="300" ></button>
+            <div id="name4">To gain weight</div>
+        </div>
+        
+    </div>
+      
+        <div id="section3" class="section">
+            <div class="container3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="flip-container">
+                            <div class="flipper" id="flipper">
+                                <!-- Front side of the card -->
+                                <div class="card front">
+                                    <div class="card-body">
+                                        <form id="myForm" return false;">
+                                            <h5 class="text-center mb-4">Enter Nutrient values</h5>
+                                            <div class="row">
+                                                <!-- Left side columns -->
+                                                <div class="col-md-6">
+                                                    <!-- Nutrient 1 -->
+                                                    <div class="form-group">
+                                                        <label for="Fats">Fats</label>
+                                                        <input type="text" class="form-control" id="nutrient1" placeholder="Enter fat values">
+                                                    </div>
+                                                    <!-- Saturated fats -->
+                                                    <div class="form-group">
+                                                        <label for="Saturated fats">Saturated fats:</label>
+                                                        <input type="text" class="form-control" id="nutrient2" placeholder="Enter Saturated fats">
+                                                    </div>
+                                                    <!-- Carbohydrates -->
+                                                    <div class="form-group">
+                                                        <label for="Carbohydrates">Carbohydrates:</label>
+                                                        <input type="text" class="form-control" id="Carbohydrates" placeholder="Enter Carbohydrates">
+                                                    </div>
+                                                    <!-- Energy -->
+                                                    <div class="form-group">
+                                                        <label for="Energy">Energy:</label>
+                                                        <input type="text" class="form-control" id="Energy" placeholder="Enter Energy">
+                                                    </div>
+                                                </div>
+                                                <!-- Right side columns -->
+                                                <div class="col-md-6">
+                                                    <!-- Sugar -->
+                                                    <div class="form-group">
+                                                        <label for="Sugar">Sugar:</label>
+                                                        <input type="text" class="form-control" id="Sugar" placeholder="Enter Sugar">
+                                                    </div>
+                                                    <!-- Fiber -->
+                                                    <div class="form-group">
+                                                        <label for="Fiber">Fiber:</label>
+                                                        <input type="text" class="form-control" id="Fiber" placeholder="Enter Fiber">
+                                                    </div>
+                                                    <!-- Protein -->
+                                                    <div class="form-group">
+                                                        <label for="Protein">Protein:</label>
+                                                        <input type="text" class="form-control" id="Protein" placeholder="Enter Protein">
+                                                    </div>
+                                                    <!-- Salt -->
+                                                    <div class="form-group">
+                                                        <label for="Salt">Salt:</label>
+                                                        <input type="text" class="form-control" id="Salt" placeholder="Enter Salt">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Centered button for form submission -->
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-primary" onclick="flipCard()">Flip to Scan</button>
+                                                
+                                                <button type="submit" style="z-index:99;" class="btn btn-success" onclick="scrollToPage('section4')">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Back side of the card -->
+                                <div class="card back">
+                                    <div class="card-body">
+                                        <center>
+                                            <h5 class="card-title">Scan Results</h5>
+                                            <video id="cameraFeed" width="640" height="480" autoplay></video><br>
+                                            <button type="button" class="btn btn-secondary" onclick="performOCR()">Scan and Process</button>
+                                            <button type="button" class="btn btn-primary" onclick="unflipCard()">Go Back</button>
+                                            <div id="ocrResult"></div>
+                                        </center>
+                                    </div>
+                                    <script>
+                                        document.querySelector('form').addEventListener('submit', async function (e) {
+                                            e.preventDefault();
+                                    
+                                            const formData = new FormData(this);
+                                    
+                                            const response = await fetch('/process_image', {
+                                                method: 'POST',
+                                                body: formData
+                                            });
+                                    
+                                            const result = await response.json();
+                                    
+                                            document.getElementById('result').textContent = result.result;
+                                        });
+                                    </script>
+                                </div>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+       
+        <div class="section" id="section4">
+            Your Predicted score is
+            <div id="randomNumberContainer" onmouseenter="generateRandomNumber()"></div>
+        </div>
+
+        <script>//OCR Version
+            // Get the video element
+
+
+            // Request access to the camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error('Error accessing camera:', error);
+                });
+
+            function performOCR() {
+                // Create a canvas to draw the current frame
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert canvas to base64 image
+                const dataUrl = canvas.toDataURL('image/jpeg');
+                const base64Image = dataUrl.split(',')[1];
+
+                // Send the image to the server for OCR processing
+                fetch('/process_ocr', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image: base64Image }),
+                })
+                .then(response => response.json())
+                .then(result => {
+                    // Display the OCR result
+                    document.getElementById('ocrResult').textContent = result.result;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        </script>
+
+        <script>//flip card
+            function flipCard() {
+                document.getElementById('flipper').classList.add('flipped');
+            }
+
+            function unflipCard() {
+                document.getElementById('flipper').classList.remove('flipped');
+            }
+        </script>
+
+        <script>//Scroll of page
+        function scrollToPage(sectionId) {
+            const sections = document.getElementById(sectionId);
+
+            if (sections) {
+                sections.style.display = 'flex';
+                window.scrollTo({
+                    top: sections.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        </script>
+
+        <script>//odometer scroll
+       
+
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+        </html>
+
+    <script>
+        // Get the video element
+        let video = document.getElementById('cameraFeed');
+    
+        // Request access to the camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((error) => {
+                console.error('Error accessing camera:', error);
+            });
+    
+        function performOCR() {
+            // Create a canvas to draw the current frame
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+            // Convert canvas to base64 image
+            const dataUrl = canvas.toDataURL('image/jpeg');
+            const base64Image = dataUrl.split(',')[1];
+    
+            // Send the image to the server for OCR processing
+            fetch('/process_ocr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: base64Image }),
+            })
+            .then(response => response.json())
+            .then(result => {
+                // Display the OCR result
+                document.getElementById('ocrResult').textContent = result.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script>
+        function scrollToPage(sectionId) {
+            const nextPage = document.getElementById(sectionId);
+
+            if (nextPage) {
+                nextPage.style.display = 'flex';
+                window.scrollTo({
+                    top: nextPage.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+</script>
+<script>
+    const cart = document.getElementById('cart');
+
+    // Event listener to check when the animation completes
+    cart.addEventListener('animationiteration', checkCartPosition);
+    
+    function checkCartPosition() {
+        // Get the position of the cart
+        const cartRect = cart.getBoundingClientRect();
+    
+        // Check if the cart is near the right edge of the viewport
+        if (cartRect.right >= window.innerWidth) {
+            // Perform the page transition logic here
+            // For now, let's simply redirect to the next page
+            window.location.href = 'nextPage.html';
+        }
+    }
+</script>
+    <script>
+        function flipCard() {
+            document.getElementById('flipper').classList.add('flipped');
+        }
+
+        function unflipCard() {
+            document.getElementById('flipper').classList.remove('flipped');
+        }
+    </script>
+     <script>
+        function flipCard() {
+            document.getElementById('flipper').classList.add('flipped');
+        }
+    
+        function unflipCard() {
+            document.getElementById('flipper').classList.remove('flipped');
+        }
+    </script>
+
+    
+    <script>
+        function flipCard() {
+            document.getElementById('flipper').classList.add('flipped');
+        }
+    
+        function unflipCard() {
+            document.getElementById('flipper').classList.remove('flipped');
+        }
+    </script>
+    <script>document.getElementById('imageInput').addEventListener('change', handleImage);
+
+        function handleImage() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+        
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const image = new Image();
+                    image.src = e.target.result;
+                    image.onload = function () {
+                        processImage(image);
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function processImage(image) {
+            Tesseract.recognize(
+                image,
+                'eng', // Language code (English in this case)
+                {
+                    logger: info => console.log(info)
+                }
+            ).then(({ data: { text } }) => {
+                document.getElementById('result').textContent = text;
+            });
+        }
+        </script>
+    <script>
+        function flipCard() {
+            document.getElementById('flipper').classList.add('flipped');
+        }
+    
+        function unflipCard() {
+            document.getElementById('flipper').classList.remove('flipped');
+        }
+       
+
+    </script>
+    
+    <script>
+        function generateRandomNumber() {
+          // Generate a random number between 1 and 10 (including decimals)
+          const randomNumber = (Math.random() * 9) + 1;
+      
+          // Update the content of the div with the generated random number
+          document.getElementById('randomNumberContainer').innerHTML = `${randomNumber.toFixed(1)}`;
+        }
+      </script>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
